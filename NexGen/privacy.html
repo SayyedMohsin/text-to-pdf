@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | NexGen Studio</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --primary: #8b3dff;
+            --bg-color: #f4f5f7;
+            --text-main: #0e131f;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --card-bg: #ffffff;
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius-md: 0.5rem;
+            --radius-xl: 1rem;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; background-image: radial-gradient(circle at 50% 0%, #ffffff 0%, transparent 70%); }
+        .navbar { position: fixed; top: 0; left: 0; right: 0; height: 72px; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.3); display: flex; align-items: center; padding: 0 40px; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.02); transition: all 0.3s ease; }
+        .nav-left { font-weight: 800; font-size: 22px; color: var(--text-main); letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .nav-left i { color: var(--primary); }
+        .project-footer { margin-top: auto; padding: 30px 0; background: var(--card-bg); border-top: 1px solid var(--border-color); display: flex; justify-content: center; align-items: center; width: 100%; }
+        .footer-content { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 24px; font-size: 14px; color: var(--text-muted); max-width: 1000px; padding: 0 20px; }
+        .footer-content span { font-weight: 600; color: var(--text-main); }
+        .footer-content a { text-decoration: none; color: var(--text-muted); font-weight: 500; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+        .footer-content a:hover { color: var(--primary); }
+        .footer-content i { width: 18px; height: 18px; color: inherit; }
+        .v-sep { width: 1px; height: 16px; background: var(--border-color); }
+        
+        .main-content { padding: 120px 20px 80px; display: flex; justify-content: center; align-items: flex-start; flex: 1; }
+        .container { max-width: 900px; width: 100%; background: var(--card-bg); padding: 50px 60px; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); border: 1px solid rgba(0,0,0,0.05); animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        
+        h1 { font-size: 36px; font-weight: 800; color: var(--text-main); margin-bottom: 8px; letter-spacing: -1px; }
+        .update-date { color: var(--text-muted); font-size: 14px; margin-bottom: 40px; display: block; font-weight: 500; }
+        
+        section { margin-bottom: 40px; }
+        h2 { color: var(--text-main); font-size: 20px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        h2 i { color: var(--primary); }
+        
+        p, li { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+        ul { margin-left: 24px; margin-bottom: 20px; }
+        li { margin-bottom: 8px; }
+        strong { color: var(--text-main); }
+        
+        .contact-box { background: rgba(139, 61, 255, 0.03); padding: 30px; border-radius: var(--radius-md); margin-top: 40px; border: 1px solid rgba(139, 61, 255, 0.1); }
+        .contact-box h2 { margin-bottom: 12px; }
+        .contact-box p { margin-bottom: 8px; }
+        
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) { .navbar { padding: 0 24px; } .container { padding: 30px 20px; } h1 { font-size: 30px; } }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="nav-left"><i data-lucide="layers" size="28"></i>NexGen Studio</a>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <span class="update-date">Last updated: April 11, 2026</span>
+
+            <p>This Privacy Policy describes how <strong>NexGen Studio</strong> ("we," "us," or "our") collects, uses, and shares your information when you visit our website.</p>
+
+            <section>
+                <h2><i data-lucide="shield-check" size="22"></i> 1. Information We Collect</h2>
+                <p><strong>Voluntary Information:</strong> We only collect personal information that you voluntarily provide, such as your name or email address if you contact us directly.</p>
+                <p><strong>Automated Information:</strong> When you visit NexGen Studio, we automatically collect certain information about your device, including IP address, browser type, and operating system via cookies.</p>
+            </section>
+
+            <section>
+                <h2><i data-lucide="settings" size="22"></i> 2. How We Use Your Information</h2>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li>Provide and maintain our Services (PDF editing, text processing).</li>
+                    <li>Improve and personalize your experience.</li>
+                    <li>Display relevant advertisements through Google AdSense.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2><i data-lucide="cookie" size="22"></i> 3. Cookies and Advertising</h2>
+                <p>We use cookies to enhance site navigation and analyze site usage.</p>
+                <p><strong>Google AdSense:</strong> As a third-party vendor, Google uses cookies to serve ads on our site. Google's use of the DART cookie enables it to serve ads to our users based on their visit to our site and other sites on the Internet.</p>
+                <p>Users may opt-out of the use of the DART cookie by visiting the Google Ad and Content Network privacy policy.</p>
+            </section>
+
+            <section>
+                <h2><i data-lucide="database" size="22"></i> 4. Data Storage</h2>
+                <p>NexGen Studio is a client-side tool. This means the documents you edit (PDFs, Images) are processed entirely in your browser and are <strong>not stored on our servers</strong> unless explicitly saved by you.</p>
+            </section>
+
+            <section>
+                <h2><i data-lucide="user-check" size="22"></i> 5. Your Rights</h2>
+                <p>Depending on your location, you have the right to access, update, or delete your personal data. To exercise these rights, please contact us at the email provided below.</p>
+            </section>
+
+
+        </div>
+    </main>
+
+    <footer class="project-footer">
+        <div class="footer-content">
+            <span>&copy; 2026 Sayyed Mohsin Ali</span>
+            <div class="v-sep"></div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="contact.html">Contact Us</a>
+            <div class="v-sep"></div>
+            <a href="https://github.com/SayyedMohsin" target="_blank" rel="noopener"><i data-lucide="github"></i> GitHub</a>
+            <a href="https://www.linkedin.com/in/sayyed-mohsin-ali-63b8032b2/" target="_blank" rel="noopener"><i data-lucide="linkedin"></i> LinkedIn</a>
+        </div>
+    </footer>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

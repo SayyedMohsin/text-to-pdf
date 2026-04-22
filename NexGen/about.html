@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | NexGen Studio</title>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root { 
+            --primary: #8b3dff;
+            --primary-hover: #7a35e0;
+            --bg-color: #f4f5f7;
+            --text-main: #0e131f;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --card-bg: #ffffff;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius-md: 0.5rem;
+            --radius-xl: 1rem;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-main);
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 50% 0%, #ffffff 0%, transparent 70%);
+        }
+
+        /* NAVBAR - Sleek & Glassmorphism */
+        .navbar { 
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 72px; 
+            background: rgba(255, 255, 255, 0.75); 
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
+            display: flex; 
+            align-items: center; 
+            padding: 0 40px; 
+            z-index: 1000; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-left { 
+            font-weight: 800; 
+            font-size: 22px; 
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .nav-left i { color: var(--primary); }
+
+        /* FOOTER */
+        .project-footer { 
+            margin-top: auto;
+            padding: 30px 0; 
+            background: var(--card-bg); 
+            border-top: 1px solid var(--border-color); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            width: 100%;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+
+        .footer-content span { font-weight: 600; color: var(--text-main); }
+        .footer-content a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .footer-content a:hover { color: var(--primary); }
+        .footer-content i { width: 18px; height: 18px; color: inherit; }
+        .v-sep { width: 1px; height: 16px; background: var(--border-color); }
+
+        /* MAIN CONTENT */
+        .main-content {
+            padding: 120px 20px 80px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-start; 
+            flex: 1;
+        }
+
+        .content-card {
+            max-width: 800px; 
+            width: 100%; 
+            background: var(--card-bg); 
+            padding: 50px 60px; 
+            border-radius: var(--radius-xl); 
+            box-shadow: var(--shadow-xl); 
+            border: 1px solid rgba(0,0,0,0.05);
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .content-card h1 {
+            font-size: 40px; 
+            font-weight: 800; 
+            color: var(--text-main); 
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .content-card p {
+            font-size: 17px; 
+            color: var(--text-muted); 
+            line-height: 1.8; 
+            margin-bottom: 20px;
+        }
+        .content-card strong { color: var(--text-main); }
+
+        .mission-box {
+            background: rgba(139, 61, 255, 0.03); 
+            border-left: 4px solid var(--primary); 
+            padding: 30px; 
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin-top: 40px;
+        }
+
+        .mission-title {
+            font-weight: 800; 
+            color: var(--primary); 
+            font-size: 20px; 
+            display: block; 
+            margin-bottom: 12px;
+        }
+
+        .mission-box p { margin: 0; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 0 24px; }
+            .content-card { padding: 30px 20px; }
+            .content-card h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="nav-left">
+            <i data-lucide="layers" size="28"></i>
+            NexGen Studio
+        </a>
+    </header>
+
+    <main class="main-content">
+        <div class="content-card">
+            <h1>About Us</h1>
+            <p>Welcome to <strong>NexGen Studio</strong>, your premium destination for effortless digital design and document editing.</p>
+            <p>Founded by <strong>Sayyed Mohsin Ali</strong>, NexGen Studio was built with a vision to provide a high-performance, intuitive drag-and-drop experience for editing PDFs, creating professional text layouts, and manipulating images—all completely for free right in your browser.</p>
+            
+            <div class="mission-box">
+                <span class="mission-title">Our Mission</span>
+                <p>To democratize design by providing powerful tools that run directly in your browser without the need for heavy software installations. Whether you are a student, a professional, or a creative enthusiast, NexGen Studio is designed to make your workflow faster, smoother, and more beautiful.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="project-footer">
+        <div class="footer-content">
+            <span>&copy; 2026 Sayyed Mohsin Ali</span>
+            <div class="v-sep"></div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="contact.html">Contact Us</a>
+            <div class="v-sep"></div>
+            <a href="https://github.com/SayyedMohsin" target="_blank" rel="noopener"><i data-lucide="github"></i> GitHub</a>
+            <a href="https://www.linkedin.com/in/sayyed-mohsin-ali-63b8032b2/" target="_blank" rel="noopener"><i data-lucide="linkedin"></i> LinkedIn</a>
+        </div>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

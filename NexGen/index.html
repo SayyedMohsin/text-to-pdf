@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexGen Studio | Professional Design Made Simple</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;700&family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&family=Playfair+Display:wght@700&family=Lato:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root { 
+            --primary: #8b3dff;
+            --primary-hover: #7a35e0;
+            --bg-color: #f4f5f7;
+            --text-main: #0e131f;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --card-bg: #ffffff;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-main);
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: radial-gradient(at 0% 0%, hsla(271,85%,88%,0.4) 0, transparent 40%), 
+                              radial-gradient(at 100% 0%, hsla(340,100%,94%,0.4) 0, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* NAVBAR - Sleek & Glassmorphism */
+        .navbar { 
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 72px; 
+            background: rgba(255, 255, 255, 0.75); 
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 0 40px; 
+            z-index: 1000; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-left { 
+            font-weight: 800; 
+            font-size: 22px; 
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-left i {
+            color: var(--primary);
+        }
+
+        .nav-center { 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            background: rgba(139, 61, 255, 0.05); 
+            padding: 8px 16px; 
+            border-radius: 100px; 
+            border: 2px dashed rgba(139, 61, 255, 0.3);
+            box-shadow: 0 4px 12px rgba(139, 61, 255, 0.1);
+        }
+
+        .nav-right { display: flex; gap: 12px; }
+
+        .btn-tool { 
+            background: transparent; 
+            border: 1px solid transparent; 
+            padding: 8px 12px; 
+            border-radius: var(--radius-md); 
+            cursor: pointer; 
+            font-weight: 600; 
+            font-size: 13px; 
+            color: var(--text-muted);
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            transition: all 0.2s ease;
+        }
+        .btn-tool:hover { 
+            background: var(--bg-color);
+            color: var(--primary); 
+        }
+        
+        .btn-primary { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(139, 61, 255, 0.25);
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(139, 61, 255, 0.35);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            margin-top: 72px; /* offset navbar */
+            padding: 30px 20px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 4.5vw, 64px);
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            max-width: 100%;
+            white-space: nowrap;
+            line-height: 1.05;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary) 0%, #d946ef 50%, var(--primary) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 3s linear infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        /* WORKSPACE */
+        .workspace-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0 100px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .workspace { 
+            position: relative;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 60px; 
+            width: 100%;
+        }
+
+        .canvas-wrapper {
+            position: relative;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+        }
+
+        .canvas-card { 
+            position: relative; 
+            background: var(--card-bg); 
+            box-shadow: var(--shadow-xl); 
+            border: 2px solid transparent; 
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .canvas-card:hover {
+            box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .canvas-card.active-page { 
+            border-color: var(--primary); 
+        }
+
+        .page-del-btn { 
+            position: absolute; 
+            right: -50px; 
+            top: 0; 
+            background: #ffffff; 
+            color: #ef4444; 
+            border: 1px solid #fee2e2;
+            width: 40px; 
+            height: 40px; 
+            border-radius: var(--radius-md); 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: var(--shadow-md);
+            transition: all 0.2s;
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        .canvas-wrapper:hover .page-del-btn {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .page-del-btn:hover {
+            background: #fef2f2;
+            transform: scale(1.05);
+        }
+
+        /* FLOATING TOOLBAR */
+        #floating-toolbar {
+            position: fixed; 
+            top: 160px; 
+            left: 50%; 
+            transform: translateX(-50%) translateY(-20px);
+            display: none; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(16px);
+            padding: 14px 24px; 
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.06); 
+            z-index: 2000; 
+            align-items: center; 
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px; 
+            border: 1px solid rgba(0,0,0,0.05);
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 90vw;
+        }
+        #floating-toolbar.active { 
+            display: flex; 
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .v-sep { 
+            width: 1px; 
+            height: 24px; 
+            background: var(--border-color); 
+            margin: 0 4px;
+        }
+
+        .size-input { 
+            width: 60px; 
+            border: 1px solid var(--border-color); 
+            border-radius: var(--radius-md); 
+            padding: 8px; 
+            text-align: center; 
+            font-weight: 600;
+            color: var(--text-main);
+            background: var(--bg-color);
+            transition: border-color 0.2s;
+        }
+        .size-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        select {
+            appearance: none;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 36px 8px 16px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            color: var(--text-main);
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            transition: border-color 0.2s;
+        }
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        input[type="color"] {
+            -webkit-appearance: none;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 0 0 1px var(--border-color) inset;
+            background: transparent;
+        }
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 2px;
+        }
+        input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 50%;
+        }
+
+        /* FOOTER */
+        .project-footer { 
+            margin-top: auto;
+            padding: 30px 0; 
+            background: var(--card-bg); 
+            border-top: 1px solid var(--border-color); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+
+        .footer-content span {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .footer-content a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .footer-content a:hover {
+            color: var(--primary);
+        }
+
+        .footer-content i {
+            width: 18px;
+            height: 18px;
+            color: inherit;
+        }
+
+
+
+        /* ANIMATIONS */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .navbar { padding: 0 24px; }
+            .hero h1 { font-size: 52px; }
+        }
+        @media (max-width: 768px) {
+            .nav-center { display: none; }
+            .hero h1 { font-size: 40px; }
+            .hero p { font-size: 18px; }
+            .workspace-container { padding: 0; transform: scale(0.6); transform-origin: top center; margin-bottom: -400px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-left">
+            <i data-lucide="layers" size="28"></i>
+            NexGen Studio
+        </div>
+        <div class="nav-center">
+            <button class="btn-tool" onclick="addText('heading')" title="Add Heading"><i data-lucide="heading" size="20"></i></button>
+            <button class="btn-tool" onclick="addText('body')" title="Add Body Text"><i data-lucide="type" size="20"></i></button>
+            <div class="v-sep"></div>
+            <button class="btn-tool" onclick="document.getElementById('img-upload').click()" title="Upload Image"><i data-lucide="image" size="20"></i></button>
+            <input type="file" id="img-upload" hidden onchange="uploadImage(event)">
+            <div class="v-sep"></div>
+            <button class="btn-tool" onclick="toggleList('bullet')" title="Bullet List"><i data-lucide="list" size="20"></i></button>
+            <button class="btn-tool" onclick="toggleList('number')" title="Numbered List"><i data-lucide="list-ordered" size="20"></i></button>
+            <div class="v-sep"></div>
+            <button class="btn-tool" onclick="addNewPage()" title="Add Page"><i data-lucide="plus-square" size="20"></i></button>
+            <button class="btn-tool" onclick="toggleOrientation()" title="Rotate Canvas"><i data-lucide="refresh-cw" size="20"></i></button>
+        </div>
+        <div class="nav-right">
+            <button class="btn-primary" onclick="downloadPDF()">
+                <i data-lucide="download" size="18"></i> 
+                Export PDF
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Professional Design <span>Made Simple</span></h1>
+    </section>
+
+    <main class="workspace-container">
+        <div class="workspace" id="workspace">
+            <div class="canvas-wrapper" id="wrapper-1">
+                <div class="canvas-card active-page" id="card-1">
+                    <canvas id="canva-1"></canvas>
+                </div>
+                <button class="page-del-btn" onclick="deletePage('wrapper-1')" title="Delete Page"><i data-lucide="trash-2" size="20"></i></button>
+            </div>
+        </div>
+
+        <div id="floating-toolbar">
+            <div id="standard-tools" style="display:flex; align-items:center; gap:8px;">
+                <select id="font-family" onchange="updateStyle('fontFamily', this.value)">
+                    <option value="Arial">Arial</option>
+                    <option value="Inter" selected>Inter</option>
+                    <option value="Montserrat">Montserrat</option>
+                    <option value="Roboto">Roboto</option>
+                    <option value="Open Sans">Open Sans</option>
+                    <option value="Playfair Display">Playfair</option>
+                    <option value="Lato">Lato</option>
+                    <option value="Poppins">Poppins</option>
+                </select>
+                
+                <input type="number" id="font-size" class="size-input" onchange="updateStyle('fontSize', this.value)" title="Font Size">
+                
+                <input type="color" id="font-color" onchange="updateStyle('fill', this.value)" title="Text Color">
+                
+                <div class="v-sep"></div>
+                
+                <button class="btn-tool" id="btn-start-crop" style="display:none; color:var(--primary);" onclick="startCropMode()" title="Crop Image">
+                    <i data-lucide="crop" size="20"></i>
+                </button>
+                
+                <button class="btn-tool" onclick="toggleFormat('bold')" title="Bold"><i data-lucide="bold" size="20"></i></button>
+                <button class="btn-tool" onclick="toggleFormat('italic')" title="Italic"><i data-lucide="italic" size="20"></i></button>
+                <button class="btn-tool" onclick="toggleFormat('underline')" title="Underline"><i data-lucide="underline" size="20"></i></button>
+                
+                <div class="v-sep"></div>
+                
+                <button class="btn-tool" onclick="updateStyle('textAlign', 'left')" title="Align Left"><i data-lucide="align-left" size="20"></i></button>
+                <button class="btn-tool" onclick="updateStyle('textAlign', 'center')" title="Align Center"><i data-lucide="align-center" size="20"></i></button>
+                <button class="btn-tool" onclick="updateStyle('textAlign', 'right')" title="Align Right"><i data-lucide="align-right" size="20"></i></button>
+                <button class="btn-tool" onclick="updateStyle('textAlign', 'justify')" title="Align Justify"><i data-lucide="align-justify" size="20"></i></button>
+            </div>
+
+            <div id="crop-actions" style="display:none; align-items:center; gap:12px;">
+                <span style="font-size: 14px; font-weight: 600; margin-right: 4px; color: var(--primary);">Crop Mode</span>
+                <button class="btn-primary" style="padding: 8px 16px; font-size: 13px;" onclick="applyCrop()">Apply</button>
+                <button class="btn-tool" style="color: #ef4444;" onclick="cancelCrop()">Cancel</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="project-footer">
+        <div class="footer-content">
+            <span>&copy; 2026 Sayyed Mohsin Ali</span>
+            
+            <div class="v-sep"></div>
+            
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="contact.html">Contact Us</a>
+            
+            <div class="v-sep"></div>
+            
+            <a href="https://github.com/SayyedMohsin" target="_blank" rel="noopener">
+                <i data-lucide="github"></i> GitHub
+            </a>
+            
+            <a href="https://www.linkedin.com/in/sayyed-mohsin-ali-63b8032b2/" target="_blank" rel="noopener">
+                <i data-lucide="linkedin"></i> LinkedIn
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Canvas State
+        let canvases = [];
+        let activeCanvas = null;
+        let _clipboard = null;
+        let cropRect = null;
+        let imageBeingCropped = null;
+        const pageWidth = 794; // A4 width at 96 DPI
+        const pageHeight = 1123; // A4 height at 96 DPI
+
+        function initCanvas(id) {
+            const c = new fabric.Canvas(id, { 
+                width: pageWidth, 
+                height: pageHeight, 
+                backgroundColor: '#ffffff', 
+                preserveObjectStacking: true
+            });
+            
+            c.on('selection:created', (e) => syncToolbar(e.selected[0]));
+            c.on('selection:updated', (e) => syncToolbar(e.selected[0]));
+            c.on('selection:cleared', () => {
+                document.getElementById('floating-toolbar').classList.remove('active');
+                if(cropRect) cancelCrop();
+            });
+            c.on('mouse:down', () => setActiveCanvas(c));
+            
+            canvases.push(c);
+            return c;
+        }
+
+        activeCanvas = initCanvas('canva-1');
+
+        function setActiveCanvas(c) {
+            activeCanvas = c;
+            document.querySelectorAll('.canvas-card').forEach(card => card.classList.remove('active-page'));
+            if(c.lowerCanvasEl && c.lowerCanvasEl.closest('.canvas-card')) {
+                c.lowerCanvasEl.closest('.canvas-card').classList.add('active-page');
+            }
+        }
+
+        // --- KEYBOARD (Copy, Paste, Delete) ---
+        window.addEventListener('keydown', (e) => {
+            if(cropRect) return;
+            const obj = activeCanvas.getActiveObject();
+            if ((e.key === "Delete" || e.key === "Backspace") && obj && !obj.isEditing) {
+                activeCanvas.remove(obj);
+                document.getElementById('floating-toolbar').classList.remove('active');
+            }
+            if (e.ctrlKey && e.key === 'c' && obj) obj.clone(cloned => { _clipboard = cloned; });
+            if (e.ctrlKey && e.key === 'v' && _clipboard) {
+                _clipboard.clone(cloned => {
+                    activeCanvas.discardActiveObject();
+                    cloned.set({ left: cloned.left + 20, top: cloned.top + 20, evented: true });
+                    activeCanvas.add(cloned).setActiveObject(cloned).requestRenderAll();
+                });
+            }
+        });
+
+        // --- PROFESSIONAL CROP LOGIC ---
+        function startCropMode() {
+            imageBeingCropped = activeCanvas.getActiveObject();
+            if (!imageBeingCropped || imageBeingCropped.type !== 'image') return;
+
+            document.getElementById('standard-tools').style.display = 'none';
+            document.getElementById('crop-actions').style.display = 'flex';
+
+            cropRect = new fabric.Rect({
+                left: imageBeingCropped.left,
+                top: imageBeingCropped.top,
+                width: imageBeingCropped.getScaledWidth() / 2,
+                height: imageBeingCropped.getScaledHeight() / 2,
+                fill: 'rgba(139, 61, 255, 0.15)', 
+                stroke: '#8b3dff', 
+                strokeWidth: 2, 
+                strokeDashArray: [5, 5],
+                cornerColor: '#8b3dff', 
+                cornerSize: 12, 
+                transparentCorners: false,
+                borderColor: '#8b3dff'
+            });
+
+            activeCanvas.add(cropRect);
+            activeCanvas.setActiveObject(cropRect);
+            activeCanvas.renderAll();
+        }
+
+        function applyCrop() {
+            if (!imageBeingCropped || !cropRect) return;
+
+            const scaleX = imageBeingCropped.scaleX;
+            const scaleY = imageBeingCropped.scaleY;
+            
+            const cropX = (cropRect.left - imageBeingCropped.left) / scaleX;
+            const cropY = (cropRect.top - imageBeingCropped.top) / scaleY;
+            const cropWidth = cropRect.getScaledWidth() / scaleX;
+            const cropHeight = cropRect.getScaledHeight() / scaleY;
+
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = cropWidth;
+            tempCanvas.height = cropHeight;
+            const ctx = tempCanvas.getContext('2d');
+
+            ctx.drawImage(
+                imageBeingCropped._element,
+                cropX, cropY, cropWidth, cropHeight,
+                0, 0, cropWidth, cropHeight
+            );
+
+            fabric.Image.fromURL(tempCanvas.toDataURL(), (newImg) => {
+                newImg.set({
+                    left: cropRect.left,
+                    top: cropRect.top,
+                    scaleX: scaleX,
+                    scaleY: scaleY
+                });
+                activeCanvas.remove(imageBeingCropped);
+                activeCanvas.add(newImg);
+                activeCanvas.setActiveObject(newImg);
+                quitCropMode();
+            });
+        }
+
+        function cancelCrop() { quitCropMode(); }
+
+        function quitCropMode() {
+            if(cropRect) activeCanvas.remove(cropRect);
+            cropRect = null;
+            imageBeingCropped = null;
+            document.getElementById('standard-tools').style.display = 'flex';
+            document.getElementById('crop-actions').style.display = 'none';
+            document.getElementById('floating-toolbar').classList.remove('active');
+            activeCanvas.renderAll();
+        }
+
+        // --- SYNC TOOLBAR ---
+        function syncToolbar(obj) {
+            if(cropRect || !obj) return;
+            const tb = document.getElementById('floating-toolbar');
+            const cropBtn = document.getElementById('btn-start-crop');
+            
+            tb.classList.add('active');
+            cropBtn.style.display = (obj.type === 'image') ? 'flex' : 'none';
+            
+            if(obj.type === 'i-text' || obj.type === 'textbox' || obj.type === 'text') {
+                document.getElementById('font-size').value = obj.fontSize || 20;
+                document.getElementById('font-color').value = obj.fill || '#111827';
+                
+                let fontSelect = document.getElementById('font-family');
+                if(obj.fontFamily) {
+                    for(let i=0; i<fontSelect.options.length; i++) {
+                        if(fontSelect.options[i].value === obj.fontFamily) {
+                            fontSelect.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        // --- STANDARD TOOLS ---
+        function addText(type) {
+            const text = new fabric.Textbox(type === 'heading' ? 'Heading' : 'Add your text here', {
+                left: activeCanvas.width / 2 - (type === 'heading' ? 150 : 200), 
+                top: 60,
+                width: type === 'heading' ? 300 : 400,
+                fontSize: type === 'heading' ? 48 : 20,
+                fontFamily: 'Inter', 
+                fontWeight: type === 'heading' ? '800' : '400', 
+                fill: '#111827',
+                splitByGrapheme: true
+            });
+            activeCanvas.add(text).setActiveObject(text);
+        }
+
+        function uploadImage(e) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                fabric.Image.fromURL(event.target.result, (img) => {
+                    img.scaleToWidth(400);
+                    activeCanvas.add(img).centerObject(img).setActiveObject(img);
+                });
+            };
+            if(e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+            e.target.value = ''; // Reset input
+        }
+
+        function updateStyle(prop, val) {
+            const obj = activeCanvas.getActiveObject();
+            if(obj) {
+                obj.set(prop, prop === 'fontSize' ? parseInt(val) : val);
+                activeCanvas.renderAll();
+            }
+        }
+
+        function toggleFormat(type) {
+            const obj = activeCanvas.getActiveObject();
+            if(!obj) return;
+            if(type === 'bold') obj.set('fontWeight', obj.fontWeight === 'bold' ? 'normal' : 'bold');
+            if(type === 'italic') obj.set('fontStyle', obj.fontStyle === 'italic' ? 'normal' : 'italic');
+            if(type === 'underline') obj.set('underline', !obj.underline);
+            activeCanvas.renderAll();
+        }
+
+        function toggleList(type) {
+            const obj = activeCanvas.getActiveObject();
+            if (!obj || (obj.type !== 'i-text' && obj.type !== 'textbox')) return;
+            let lines = obj.text.split('\n');
+            let isRemoving = (type === 'bullet' && lines[0].startsWith('• ')) || (type === 'number' && /^\d+\.\s/.test(lines[0]));
+            let newList = lines.map((line, i) => {
+                let clean = line.replace(/^•\s|^\d+\.\s/, '');
+                return isRemoving ? clean : (type === 'bullet' ? `• ${clean}` : `${i + 1}. ${clean}`);
+            }).join('\n');
+            obj.set('text', newList);
+            activeCanvas.renderAll();
+        }
+
+        function addNewPage() {
+            const idNum = Date.now();
+            const id = `canva-${idNum}`;
+            const wrapperId = `wrapper-${idNum}`;
+            
+            const wrapper = document.createElement('div');
+            wrapper.className = 'canvas-wrapper'; 
+            wrapper.id = wrapperId;
+            
+            wrapper.innerHTML = `
+                <div class="canvas-card" id="card-${idNum}">
+                    <canvas id="${id}"></canvas>
+                </div>
+                <button class="page-del-btn" onclick="deletePage('${wrapperId}')" title="Delete Page"><i data-lucide="trash-2" size="20"></i></button>
+            `;
+            
+            document.getElementById('workspace').appendChild(wrapper);
+            setActiveCanvas(initCanvas(id));
+            lucide.createIcons();
+            
+            // Scroll to new page
+            setTimeout(() => {
+                wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+
+        function deletePage(wrapperId) {
+            if(canvases.length <= 1) {
+                alert("You must have at least one page.");
+                return;
+            }
+            const wrapper = document.getElementById(wrapperId);
+            const canvasId = wrapper.querySelector('canvas').id;
+            
+            // Remove from canvases array
+            canvases = canvases.filter(c => c.lowerCanvasEl.id !== canvasId);
+            
+            // Animate removal
+            wrapper.style.transition = 'all 0.3s ease';
+            wrapper.style.opacity = '0';
+            wrapper.style.transform = 'scale(0.9)';
+            
+            setTimeout(() => {
+                wrapper.remove();
+                setActiveCanvas(canvases[canvases.length - 1]);
+            }, 300);
+        }
+
+        function toggleOrientation() {
+            const w = activeCanvas.getWidth(); 
+            const h = activeCanvas.getHeight();
+            activeCanvas.setDimensions({ width: h, height: w }); 
+            activeCanvas.requestRenderAll();
+        }
+
+        function downloadPDF() {
+            // Show loading state
+            const btn = document.querySelector('.btn-primary');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i data-lucide="loader" class="spin" size="18"></i> Generating...';
+            lucide.createIcons();
+            
+            setTimeout(() => {
+                try {
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF(canvases[0].getWidth() > canvases[0].getHeight() ? 'l' : 'p', 'mm', 'a4');
+                    
+                    canvases.forEach((c, i) => {
+                        if (i > 0) pdf.addPage('a4', c.getWidth() > c.getHeight() ? 'l' : 'p');
+                        const imgData = c.toDataURL({ format: 'png', multiplier: 2 });
+                        pdf.addImage(imgData, 'PNG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+                    });
+                    
+                    pdf.save('NexGen_Studio_Design.pdf');
+                } catch (err) {
+                    console.error("PDF generation failed:", err);
+                    alert("Failed to generate PDF. Please try again.");
+                } finally {
+                    // Restore button state
+                    btn.innerHTML = originalText;
+                    lucide.createIcons();
+                }
+            }, 100); // Small delay to allow UI to update
+        }
+
+        // Add CSS for spinner
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes spin { 100% { transform: rotate(360deg); } }
+            .spin { animation: spin 1s linear infinite; }
+        `;
+        document.head.appendChild(style);
+
+    </script>
+</body>
+</html>

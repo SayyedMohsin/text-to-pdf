@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | NexGen Studio</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --primary: #8b3dff;
+            --bg-color: #f4f5f7;
+            --text-main: #0e131f;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --card-bg: #ffffff;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius-md: 0.5rem;
+            --radius-xl: 1rem;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-main);
+            display: flex; flex-direction: column; min-height: 100vh;
+            background-image: radial-gradient(circle at 50% 0%, #ffffff 0%, transparent 70%);
+        }
+        .navbar { position: fixed; top: 0; left: 0; right: 0; height: 72px; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.3); display: flex; align-items: center; padding: 0 40px; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.02); transition: all 0.3s ease; }
+        .nav-left { font-weight: 800; font-size: 22px; color: var(--text-main); letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .nav-left i { color: var(--primary); }
+        .project-footer { margin-top: auto; padding: 30px 0; background: var(--card-bg); border-top: 1px solid var(--border-color); display: flex; justify-content: center; align-items: center; width: 100%; }
+        .footer-content { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 24px; font-size: 14px; color: var(--text-muted); max-width: 1000px; padding: 0 20px; }
+        .footer-content span { font-weight: 600; color: var(--text-main); }
+        .footer-content a { text-decoration: none; color: var(--text-muted); font-weight: 500; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+        .footer-content a:hover { color: var(--primary); }
+        .footer-content i { width: 18px; height: 18px; color: inherit; }
+        .v-sep { width: 1px; height: 16px; background: var(--border-color); }
+        
+        .main-content {
+            padding: 120px 20px 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .contact-card {
+            width: 100%;
+            max-width: 500px;
+            background: var(--card-bg);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #6320d3 100%);
+            padding: 40px 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .card-header h1 { margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -0.5px; }
+        .card-header p { margin: 10px 0 0; opacity: 0.9; font-size: 16px; }
+
+        .card-body { padding: 40px; }
+
+        .dev-info {
+            background: rgba(139, 61, 255, 0.04);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            margin-bottom: 30px;
+            border: 1px dashed rgba(139, 61, 255, 0.3);
+        }
+        .dev-info span { display: block; font-size: 12px; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px; }
+        .dev-info h3 { margin: 0; font-size: 20px; color: var(--text-main); font-weight: 700; }
+
+        .social-links { display: flex; flex-direction: column; gap: 12px; }
+
+        .btn-link {
+            display: flex; align-items: center; gap: 12px; padding: 14px 20px; 
+            background: var(--card-bg); border: 1px solid var(--border-color); 
+            border-radius: var(--radius-md); text-decoration: none; 
+            color: var(--text-main); font-weight: 600; font-size: 15px; 
+            transition: all 0.2s;
+        }
+        .btn-link i { color: var(--primary); }
+        .btn-link:hover { 
+            border-color: var(--primary); 
+            background: rgba(139, 61, 255, 0.03); 
+            transform: translateY(-2px); 
+            box-shadow: var(--shadow-md); 
+            color: var(--primary); 
+        }
+
+        .footer-text { margin-top: 30px; font-size: 13px; color: var(--text-muted); text-align: center; font-style: italic; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) { .navbar { padding: 0 24px; } .card-body { padding: 30px 20px; } }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="nav-left"><i data-lucide="layers" size="28"></i>NexGen Studio</a>
+    </header>
+
+    <main class="main-content">
+        <div class="contact-card">
+            <div class="card-header">
+                <h1>Contact Us</h1>
+                <p>We'd love to hear from you!</p>
+            </div>
+            <div class="card-body">
+                <div class="dev-info">
+                    <span>Developer</span>
+                    <h3>Sayyed Mohsin Ali</h3>
+                </div>
+                <div class="social-links">
+                    <a href="mailto:sayyedmohsinali7@gmail.com" class="btn-link">
+                        <i data-lucide="mail"></i> sayyedmohsinali7@gmail.com
+                    </a>
+                    <a href="https://www.linkedin.com/in/sayyed-mohsin-ali-63b8032b2/" target="_blank" rel="noopener" class="btn-link">
+                        <i data-lucide="linkedin"></i> LinkedIn Profile
+                    </a>
+                    <a href="https://github.com/SayyedMohsin" target="_blank" rel="noopener" class="btn-link">
+                        <i data-lucide="github"></i> GitHub Profile
+                    </a>
+                </div>
+                <p class="footer-text">We typically respond to all inquiries within 24-48 hours.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="project-footer">
+        <div class="footer-content">
+            <span>&copy; 2026 Sayyed Mohsin Ali</span>
+            <div class="v-sep"></div>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="contact.html">Contact Us</a>
+            <div class="v-sep"></div>
+            <a href="https://github.com/SayyedMohsin" target="_blank" rel="noopener"><i data-lucide="github"></i> GitHub</a>
+            <a href="https://www.linkedin.com/in/sayyed-mohsin-ali-63b8032b2/" target="_blank" rel="noopener"><i data-lucide="linkedin"></i> LinkedIn</a>
+        </div>
+    </footer>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
